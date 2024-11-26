@@ -1,11 +1,17 @@
 'use client'
 
-import { Heading } from '@radix-ui/themes'
+import { Deck, Slide, Heading as SpectacleHeading } from 'spectacle'
 
 export default function Home() {
   return (
     <main>
-      <Heading>Hello World</Heading>
+      <Deck>
+        <Slide backgroundColor="#ffffff">
+          <SpectacleHeading color="#000000">
+            Hello World Presentation
+          </SpectacleHeading>
+        </Slide>
+      </Deck>
     </main>
   )
 }

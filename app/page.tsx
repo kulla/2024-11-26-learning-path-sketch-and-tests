@@ -4,6 +4,7 @@ import {
   Deck,
   Slide as SpectacleSlide,
   Heading as SpectacleHeading,
+  Markdown,
 } from 'spectacle'
 
 interface SlideProps {
@@ -16,6 +17,21 @@ const slides: SlideProps[] = [
   {
     id: 'lebensweltbezug',
     title: 'Lebensweltbezug herstellen',
+    content: (
+      <>
+        <Markdown>
+          {`**Exercise:** Read the following statement and share your opinion on
+          it with your neighbour. Use vocabulary from last lesson like “I
+          agree,” “I think,” “I disagree,” “In my opinion”, “I don’t think”
+
+          - "Cats are better than dogs."
+          - "Homework should be banned."
+          - "Video games are a waste of time."
+          - "School should start later in the morning."
+          `}
+        </Markdown>
+      </>
+    ),
   },
   {
     id: 'vorwissen-aktivieren',
@@ -26,7 +42,7 @@ const slides: SlideProps[] = [
 export default function Home() {
   return (
     <main>
-      <Deck>
+      <Deck theme={{ colors: { primary: '#000000' } }}>
         {slides.map((slide) => (
           <Slide key={slide.id} {...slide} />
         ))}
@@ -35,10 +51,11 @@ export default function Home() {
   )
 }
 
-function Slide({ title }: SlideProps) {
+function Slide({ title, content }: SlideProps) {
   return (
     <SpectacleSlide backgroundColor="#ffffff">
       <SpectacleHeading color="#000000">{title}</SpectacleHeading>
+      {content}
     </SpectacleSlide>
   )
 }

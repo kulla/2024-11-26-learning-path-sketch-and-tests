@@ -6,20 +6,41 @@ import {
   Heading as SpectacleHeading,
 } from 'spectacle'
 
+interface SlideProps {
+  id: string
+  title: string
+  content?: React.ReactNode
+}
+
+const slides: SlideProps[] = [
+  {
+    id: 'lebensweltbezug',
+    title: 'Lebensweltbezug herstellen',
+  },
+  {
+    id: 'vorwissen-aktivieren',
+    title: 'Vorwissen aktivieren',
+  },
+]
+
 export default function Home() {
   return (
     <main>
       <Deck>
-        <Slide>
-          <Heading>Hello World Presentation</Heading>
-        </Slide>
+        {slides.map((slide) => (
+          <Slide key={slide.id} {...slide} />
+        ))}
       </Deck>
     </main>
   )
 }
 
-function Slide({ children }: { children: React.ReactNode }) {
-  return <SpectacleSlide backgroundColor="#ffffff">{children}</SpectacleSlide>
+function Slide({ title }: SlideProps) {
+  return (
+    <SpectacleSlide backgroundColor="#ffffff">
+      <Heading>{title}</Heading>
+    </SpectacleSlide>
+  )
 }
 
 function Heading({ children }: { children: React.ReactNode }) {

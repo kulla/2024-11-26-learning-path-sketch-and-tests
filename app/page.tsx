@@ -1,15 +1,12 @@
 'use client'
 
-import {
-  Deck,
-  Slide as SpectacleSlide,
-  Heading as SpectacleHeading,
-  Markdown,
-} from 'spectacle'
+import React from 'react'
+import { Heading } from '@radix-ui/themes'
 
 interface SlideProps {
   id: string
   title: string
+  nextSlide?: string
   content?: React.ReactNode
 }
 
@@ -19,19 +16,10 @@ const slides: SlideProps[] = [
     title: 'Lebensweltbezug herstellen',
     content: (
       <>
-        <Markdown>
-          {`**Exercise:** Read the following statement and share your opinion on
-          it with your neighbour. Use vocabulary from last lesson like “I
-          agree,” “I think,” “I disagree,” “In my opinion”, “I don’t think”
-
-          - "Cats are better than dogs."
-          - "Homework should be banned."
-          - "Video games are a waste of time."
-          - "School should start later in the morning."
-          `}
-        </Markdown>
+        <h1>Hello World</h1>
       </>
     ),
+    nextSlide: 'vorwissen-aktivieren',
   },
   {
     id: 'vorwissen-aktivieren',
@@ -40,22 +28,25 @@ const slides: SlideProps[] = [
 ]
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = React.useState<SlideProps | null>(
+    slides[0],
+  )
+
   return (
     <main>
-      <Deck theme={{ colors: { primary: '#000000' } }}>
-        {slides.map((slide) => (
-          <Slide key={slide.id} {...slide} />
-        ))}
-      </Deck>
+      <Slide {...currentSlide} />
     </main>
   )
 }
 
-function Slide({ title, content }: SlideProps) {
+function Slide({ title, content, nextSlide }: SlideProps) {
   return (
-    <SpectacleSlide backgroundColor="#ffffff">
-      <SpectacleHeading color="#000000">{title}</SpectacleHeading>
+    <section>
+      <Heading>{title}</Heading>
       {content}
-    </SpectacleSlide>
+      {nextSlide && (
+        <button onClick={() => console.log('next slide')}>Next</button>
+      )}
+    </section>
   )
 }

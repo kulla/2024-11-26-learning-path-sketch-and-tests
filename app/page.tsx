@@ -38,11 +38,7 @@ export default function Home() {
 function Slide({ title }: SlideProps) {
   return (
     <SpectacleSlide backgroundColor="#ffffff">
-      <Heading>{title}</Heading>
+      <SpectacleHeading color="#000000">{title}</SpectacleHeading>
     </SpectacleSlide>
   )
-}
-
-function Heading({ children }: { children: React.ReactNode }) {
-  return <SpectacleHeading color="#000000">{children}</SpectacleHeading>
 }
